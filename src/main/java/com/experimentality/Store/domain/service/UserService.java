@@ -37,7 +37,7 @@ public class UserService {
         return map;
     }
 
-    public Map<String, Object> findUserById(int usId) throws NotFoundException {
+    public Map<String, Object> getUserById(int usId) throws NotFoundException {
 
         Map<String, Object> map = new HashMap<>();
         ModelMapper modelMapper = new ModelMapper();
@@ -56,7 +56,6 @@ public class UserService {
 
         return map;
     }
-
     public UserDto getByEmail(String email) {
 
         ModelMapper modelMapper = new ModelMapper();

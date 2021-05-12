@@ -8,9 +8,9 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -23,6 +23,7 @@ public class UserController {
 
 
     @PostMapping("/new")
+    @Transactional
     @ApiOperation(value = "Creation of a new user", notes = "This endpoint creates a new user")
     @ApiResponses({
             @ApiResponse(code = 201, message = "Created"),
@@ -45,7 +46,7 @@ public class UserController {
             @ApiResponse(code = 404, message = "Not found")
     })
     public Map<String, Object> findUserByID(@RequestParam int id) throws NotFoundException {
-        return userService.findUserById(id);
+        return userService.getUserById(id);
     }
 
 

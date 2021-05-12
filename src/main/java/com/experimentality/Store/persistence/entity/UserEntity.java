@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -44,10 +45,10 @@ public class UserEntity {
     @Column(name = "u_password")
     private String password;
 
-/*    @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "role_id", updatable = false, insertable = false)
     private RoleEntity role;
 
     @OneToMany(mappedBy = "user")
-    private List<PurchaseEntity> purchases;*/
+    private List<PurchaseEntity> purchases;
 }
