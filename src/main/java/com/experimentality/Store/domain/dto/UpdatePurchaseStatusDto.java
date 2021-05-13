@@ -14,7 +14,4 @@ public class UpdatePurchaseStatusDto {
     @NotNull
     @Min(value = 1)
     private int stId;
-    @NotNull
-    @Min(value = 1)
-    private int usId;
 }

@@ -23,12 +23,14 @@ public class UserService {
 
     public Map<String, Object> newUser(UserDto userPayload) {
 
+        int roId = 3;
+
         Map<String, Object> map = new HashMap<>();
         ModelMapper modelMapper = new ModelMapper();
 
         UserEntity userEntity = modelMapper.map(userPayload, UserEntity.class);
 
-        userEntity.setRoId(3);
+        userEntity.setRoId(roId);
         userEntity.setRegDate(LocalDateTime.now());
 
         userDomainRepository.newUser(userEntity);

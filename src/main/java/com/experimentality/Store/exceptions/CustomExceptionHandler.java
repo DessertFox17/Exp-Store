@@ -1,5 +1,6 @@
 package com.experimentality.Store.exceptions;
 import com.experimentality.Store.domain.dto.ExceptionResponse;
+import com.experimentality.Store.domain.dto.ImageDto;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -28,6 +29,7 @@ public class CustomExceptionHandler extends Exception{
 
         return status;
     }
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
@@ -70,5 +72,6 @@ public class CustomExceptionHandler extends Exception{
 
         return status;
     }
+
 
 }

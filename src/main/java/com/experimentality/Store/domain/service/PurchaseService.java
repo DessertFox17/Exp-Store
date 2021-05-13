@@ -15,6 +15,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,8 +53,6 @@ public class PurchaseService {
 
         pPurchases.forEach(purchaseEntity -> purchases.add(modelMapper.map(purchaseEntity, ShowPurchaseDto.class)));
 
-        purchases.forEach(showPurchaseDto -> showPurchaseDto.getProducts().remove("images"));
-
         map.put("Purchases", purchases);
 
         return map;
@@ -82,9 +81,6 @@ public class PurchaseService {
 
         Map<String, Object> map = new HashMap<>();
 
-        userDomainRepository.findUserById(purchasePayload.getStId())
-                .orElseThrow(() -> new NotFoundException(String.format("User with id: %s not found", purchasePayload.getStId())));
-
         statusDomainRepository.findStatusById(purchasePayload.getStId())
                 .orElseThrow(() -> new NotFoundException(String.format("Status with id: %s not found", purchasePayload.getStId())));
 
@@ -101,9 +97,6 @@ public class PurchaseService {
 
     public Map<String, Object> newPurchase(NewPurchaseDto purchasePayload) throws NotFoundException {
 
-        AtomicInteger counter = new AtomicInteger();
-        AtomicInteger totPcnt = new AtomicInteger();
-
         Map<String, Object> map = new HashMap<>();
         ModelMapper modelMapper = new ModelMapper();
 
@@ -115,42 +108,36 @@ public class PurchaseService {
                 .orElseThrow(() -> new NotFoundException(String
                         .format("Status with id: %s not found", purchasePayload.getStId())));
 
-        purchasePayload.getProducts().forEach(newProductPurchaseDto -> counter.getAndIncrement());
-
-
+        purchasePayload.getProducts().forEach(newProductPurchaseDto -> {
+            try {
+                productDomainRepository
+                        .getById(newProductPurchaseDto.getPrId()).orElseThrow(() -> new NotFoundException(String
+                                .format("The product with name: %s does not exist",newProductPurchaseDto.getPrId())));
+            } catch (NotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
 
         PurchaseEntity purchase = modelMapper.map(purchasePayload, PurchaseEntity.class);
-        purchase.getProducts().forEach(product -> product.setPurchase(purchase));
 
-        purchase.getProducts().
-                forEach(productPurchaseEntity -> totPcnt.getAndAdd(productPurchaseEntity.getProduct().getDiscountPrct()));
+        purchase.getProducts().forEach(productPurchaseEntity -> productPurchaseEntity.setPurchase(purchase));
 
-        System.out.println(counter.get());
-        System.out.println(totPcnt.get());
-        System.out.println(totPcnt.get()/counter.get());
+        purchase.setDate(LocalDateTime.now());
 
-/*
-        purchase.getProducts().
-                forEach(productPurchaseEntity -> productPurchaseEntity
-                        .setTotProdsCost(productDomainRepository.getPrice(productPurchaseEntity
-                                .getProduct().getPrId()) * productPurchaseEntity.getQuantity()));
+        purchase.getProducts().forEach(productPurchaseEntity -> {
+                    productPurchaseEntity.setTotPrcntDisc(productDomainRepository.getPcntDiscount(productPurchaseEntity
+                    .getProduct().getPrId()));
 
-        purchase.getProducts()
-                .forEach(productPurchaseEntity -> productPurchaseEntity
-                        .setTotShipCost(productDomainRepository.getShipCost(productPurchaseEntity.getProduct()
-                                .getPrId()) * productPurchaseEntity.getQuantity()));
+                    productPurchaseEntity.setTotProdsCost(productDomainRepository.getDiscountPrice(productPurchaseEntity
+                    .getProduct().getPrId())*productPurchaseEntity.getQuantity());
 
-        purchase.getProducts()
-                .forEach(productPurchaseEntity -> productPurchaseEntity
-                        .setPurchaseCost(productPurchaseEntity.getTotProdsCost() + productPurchaseEntity
-                                .getTotShipCost()));
+                    productPurchaseEntity.setPurchaseCost(productPurchaseEntity.getTotProdsCost());
+                });
 
         purchaseDomainRepository.newPurchase(purchase);
-*/
 
         map.put("Message", "Products purchased succesfully");
-        /*map.put("New Purchase id: ", purchase.getPuId());*/
         return map;
     }
 }

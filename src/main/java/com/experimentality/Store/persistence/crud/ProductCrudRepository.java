@@ -4,9 +4,8 @@ import com.experimentality.Store.persistence.entity.ProductEntity;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-
 import java.util.List;
-import java.util.Optional;
+
 
 public interface ProductCrudRepository extends CrudRepository<ProductEntity,Integer> {
 
@@ -26,5 +25,15 @@ public interface ProductCrudRepository extends CrudRepository<ProductEntity,Inte
             " or lower(c.name) like %?1%")
     Long dynamicFilterCounter(String result);
 
-    Optional<ProductEntity> findByName(String name);
+    @Query(
+            value = " SELECT pr_discountprice FROM product p " +
+                    " WHERE product_id = :prId "
+            ,nativeQuery = true)
+    Double getDiscountPrice(int prId);
+
+    @Query(
+            value = " SELECT pr_pcnt_discount FROM product p " +
+                    " WHERE product_id = :prId "
+            ,nativeQuery = true)
+    Integer getPcntDiscount(int prId);
 }

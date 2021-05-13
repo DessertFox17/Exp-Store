@@ -1,5 +1,6 @@
 package com.experimentality.Store.web.controller;
 
+import com.experimentality.Store.domain.dto.ImageDto;
 import com.experimentality.Store.domain.dto.NewProductsDto;
 import com.experimentality.Store.domain.service.ProductService;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +28,22 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @PostMapping("/image")
+    @ApiOperation(value = "New image", notes = "This endpoint stores a a list of images for products")
+    @ApiResponses({
+            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 400, message = "Bad Request"),
+            @ApiResponse(code = 403, message = "Forbiden")
+    })
+    public Map<String, Object> newImage(@Valid @RequestBody List<ImageDto> imagesPayload, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            throw new IllegalArgumentException("All or some mandatory fields are incomplete");
+        }
+
+        return productService.newImages(imagesPayload);
+    }
 
     @PostMapping("/new")
     @Transactional
@@ -62,9 +79,10 @@ public class ProductController {
                                              @RequestParam(required = false, defaultValue = "false") boolean counter) {
 
         String request = "";
-        if (min & !max & !counter) request.equals("min");
-        if (max & !min & !counter) request.equals("max");
-        if (counter & !min & !max) request.equals("counter");
+        if (min & !max & !counter) request = "min";
+        if (max & !min & !counter) request = "max";
+        if (counter & !min & !max) request = "counter";
+        System.out.println(request);
 
         return productService.dynamicFilter(name, limit, offset, request);
     }

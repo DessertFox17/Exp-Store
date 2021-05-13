@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Data
@@ -14,8 +13,6 @@ public class UserDto {
     private int usId;
     @NotNull
     private String name;
-    @NotNull
-    private LocalDateTime regDate;
     @NotNull
     private String address;
     @Min(value = 1)

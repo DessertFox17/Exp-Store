@@ -11,6 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class NewPurchaseDto {
+    private int puId;
     @NotNull
     @Min(value = 1)
     private int stId;

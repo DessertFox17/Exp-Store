@@ -7,5 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class InCartProductsDto {
     private int quantity;
-    private ShowProductDto product;
+    private ShowProductinPurDto product;
 }
