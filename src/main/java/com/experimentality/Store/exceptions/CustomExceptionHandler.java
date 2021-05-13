@@ -2,7 +2,11 @@ package com.experimentality.Store.exceptions;
 import com.experimentality.Store.domain.dto.ExceptionResponse;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.time.LocalDateTime;
 
 @RestControllerAdvice
@@ -13,13 +17,13 @@ public class CustomExceptionHandler extends Exception{
 
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public Object notFound(NotFoundException e){
+    public ExceptionResponse notFound(NotFoundException e){
 
         ExceptionResponse status = new ExceptionResponse();
 
         status.setTimestamp(LocalDateTime.now());
         status.setCode(404);
-        status.setStatus("Bad Request");
+        status.setStatus("Not Found");
         status.setMessage(e.getMessage());
 
         return status;
@@ -27,7 +31,7 @@ public class CustomExceptionHandler extends Exception{
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public Object badRequest(IllegalArgumentException e){
+    public ExceptionResponse badRequest(IllegalArgumentException e){
 
         ExceptionResponse status = new ExceptionResponse();
 
@@ -41,7 +45,7 @@ public class CustomExceptionHandler extends Exception{
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(SecurityException.class)
-    public Object badRequest(SecurityException e){
+    public ExceptionResponse badRequest(SecurityException e){
 
         ExceptionResponse status = new ExceptionResponse();
 
@@ -55,7 +59,7 @@ public class CustomExceptionHandler extends Exception{
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(IllegalAccessException.class)
-    public Object badRequest(IllegalAccessException e){
+    public ExceptionResponse badRequest(IllegalAccessException e){
 
         ExceptionResponse status = new ExceptionResponse();
 

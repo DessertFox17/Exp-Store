@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,12 +31,16 @@ public class ProductServiceShould {
 
     @Test
     @Transactional
-    public void create_new_products(){
+    public void createsNewProdtcs(){
 
-        int scId = 1, discountPrct = 10;
+        int scId = 1;
+        int discountPrct = 10;
         double price = 10000.0;
-        String name = "nuevo producto", description = "Nuevo producto prueba", frontImage = "imagen frontal url",
-                backImage = "imagen trasera url", message = "Products saved succesfully";
+        String name = "nuevo producto";
+        String description = "Nuevo producto prueba";
+        String frontImage = "imagen frontal url";
+        String backImage = "imagen trasera url";
+        String message = "Products saved succesfully";
 
         ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
 
@@ -60,14 +63,16 @@ public class ProductServiceShould {
 
 
     @Test
-    public void get_products_by_name_ordered_by_search_counter_and_paged() {
+    public void getProductsByNameOrderedByADynamicFilterAndPaged() {
 
-        int limit = 1, offset = 0;
+        int limit = 1;
+        int offset = 0;
         String name = "Pantalon";
+        String request = "";
 
         ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
 
-        Map<String, Object> productList = productService.dynamicFilter(name, limit, offset);
+        Map<String, Object> productList = productService.dynamicFilter(name, limit, offset, request);
 
         List<DynamicFilterDto> products = (List<DynamicFilterDto>) productList.get("results");
         products.forEach(dynamicFilterDto -> {
@@ -76,6 +81,7 @@ public class ProductServiceShould {
             assertNotNull(dynamicFilterDto.getBackImage());
             assertNotNull(dynamicFilterDto.getSearchCounter());
             assertNotNull(dynamicFilterDto.getPrice());
+            assertNotNull(dynamicFilterDto.getDiscountPrct());
             assertNotNull(dynamicFilterDto.getDiscountPrice());
         });
 
@@ -88,21 +94,38 @@ public class ProductServiceShould {
     }
 
     @Test
-    public void get_a_specific_product_by_its_name() throws NotFoundException {
+    public void getASpecificProductByItsId() throws NotFoundException {
 
-        String name = "Pantalón dama drill azul", description = "Pantalón dama drill VO5 azul";
-        double price = 80000.0, discountPrice = 60000.0;
+        String name = "Pantalón dama drill azul";
+        String description = "Pantalón dama drill VO5 azul";
+        double price = 80000.0;
+        double discountPrice = 60000.0;
         int discountPrct = 25;
+        int prId = 6;
 
         ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
 
-        Map<String, Object> product = productService.getByName(name);
+        Map<String, Object> product = productService.getById(prId);
 
+        assertEquals(prId, product.get("prId"));
         assertEquals(name,product.get("name"));
         assertEquals(description,product.get("description"));
         assertEquals(price,product.get("price"));
         assertEquals(discountPrice,product.get("discountPrice"));
         assertEquals(discountPrct,product.get("discountPrct"));
         assertNotNull(product.get("images"));
+    }
+
+    @Test
+    public void getAListOfNamesFromTheDatabase(){
+
+        String name = "Pantalones";
+
+        ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
+
+        Map<String, Object> results = productService.smartFilter(name);
+        List<String> titles = (List<String>) results.get("results");
+
+        assertNotNull(titles);
     }
 }

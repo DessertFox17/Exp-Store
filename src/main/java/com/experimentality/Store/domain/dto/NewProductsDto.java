@@ -2,7 +2,6 @@ package com.experimentality.Store.domain.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -20,7 +19,7 @@ public class NewProductsDto {
     @DecimalMin(value = "0.1")
     @NotNull
     private double price;
-    @Min(value = 1)
+    @Min(value = 0)
     @NotNull
     private int discountPrct;
     @NotNull

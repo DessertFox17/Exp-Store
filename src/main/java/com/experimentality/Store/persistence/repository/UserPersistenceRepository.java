@@ -5,7 +5,6 @@ import com.experimentality.Store.persistence.crud.UserCrudRepository;
 import com.experimentality.Store.persistence.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository
