@@ -9,7 +9,13 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -56,9 +62,9 @@ public class ProductController {
                                              @RequestParam(required = false, defaultValue = "false") boolean counter) {
 
         String request = "";
-        if (min & !max & !counter) request = "min";
-        if (max & !min & !counter) request = "max";
-        if (counter & !min & !max) request = "counter";
+        if (min & !max & !counter) request.equals("min");
+        if (max & !min & !counter) request.equals("max");
+        if (counter & !min & !max) request.equals("counter");
 
         return productService.dynamicFilter(name, limit, offset, request);
     }
@@ -67,11 +73,11 @@ public class ProductController {
     @ApiOperation(value = "Smart filter",
             notes = "This endpoint scans the database searching for all related with the param name")
     @ApiResponse(code = 200, message = "Ok")
-    public Map<String, Object> smartFilter(@RequestParam(required = false, defaultValue = "") String name){
+    public Map<String, Object> smartFilter(@RequestParam(required = false, defaultValue = "") String name) {
         return productService.smartFilter(name);
     }
 
-    @GetMapping("/specific")
+    @GetMapping("/specific/{id}")
     @ApiOperation(value = "Find a specific product",
             notes = "This endpoint finds a product by its name and everytime that is required a specific product " +
                     " increases its search counter")
@@ -79,10 +85,7 @@ public class ProductController {
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 404, message = "Not Found")
     })
-    public Map<String, Object> getByName(@RequestParam(required = false) String name) throws NotFoundException {
-
-        if (name == null) throw new IllegalArgumentException("Name of product is required");
-
-        return productService.getByName(name);
+    public Map<String, Object> getByName(@PathVariable("id") int id) throws NotFoundException {
+        return productService.getById(id);
     }
 }

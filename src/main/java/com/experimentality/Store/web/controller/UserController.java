@@ -10,7 +10,12 @@ import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PathVariable;
 import javax.validation.Valid;
 import java.util.Map;
 
@@ -38,14 +43,14 @@ public class UserController {
         return userService.newUser(userPayload);
     }
 
-    @GetMapping("/specific")
+    @GetMapping("/specific/{id}")
     @ApiOperation(value = "Get a specific user", notes = "This endpoint gets a user by its id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 403, message = "Forbiden"),
             @ApiResponse(code = 404, message = "Not found")
     })
-    public Map<String, Object> findUserByID(@RequestParam int id) throws NotFoundException {
+    public Map<String, Object> findUserByID(@PathVariable("id") int id) throws NotFoundException {
         return userService.getUserById(id);
     }
 

@@ -1,7 +1,6 @@
 package com.experimentality.Store.domain.repository;
 
 import com.experimentality.Store.persistence.entity.UserEntity;
-
 import java.util.Optional;
 
 public interface UserDomainRepository {

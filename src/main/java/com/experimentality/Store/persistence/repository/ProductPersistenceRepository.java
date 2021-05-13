@@ -47,8 +47,8 @@ public class ProductPersistenceRepository implements ProductDomainRepository {
     }
 
     @Override
-    public Optional<ProductEntity> getByName(String name) {
-        return productCrudRepository.findByName(name);
+    public Optional<ProductEntity> getById(int id) {
+        return productCrudRepository.findById(id);
     }
 
     @Override

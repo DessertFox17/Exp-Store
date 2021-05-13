@@ -69,14 +69,14 @@ public class ProductService {
         return map;
     }
 
-    public Map<String, Object> getByName(String name) throws NotFoundException {
+    public Map<String, Object> getById(int prId) throws NotFoundException {
 
         Map<String, Object> map = new HashMap<>();
         ModelMapper modelMapper = new ModelMapper();
         List<String> images = new ArrayList<>();
 
-        ProductEntity pProduct = productDomainRepository.getByName(name)
-                .orElseThrow(() -> new NotFoundException(String.format("The product with name: %s does not exist",name)));
+        ProductEntity pProduct = productDomainRepository.getById(prId)
+                .orElseThrow(() -> new NotFoundException(String.format("The product with name: %s does not exist",prId)));
 
         ShowProductDto product = modelMapper.map(pProduct, ShowProductDto.class);
 
@@ -88,6 +88,7 @@ public class ProductService {
         pProduct.setSearchCounter(counter);
         productDomainRepository.updateProduct(pProduct);
 
+        map.put("prId", product.getPrId());
         map.put("name", product.getName());
         map.put("description", product.getDescription());
         map.put("price", product.getPrice());

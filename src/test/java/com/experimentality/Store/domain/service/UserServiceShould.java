@@ -8,8 +8,10 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+
 import javax.transaction.Transactional;
 import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(SpringRunner.class)
@@ -21,10 +23,13 @@ public class UserServiceShould {
 
     @Test
     @Transactional
-    public void create_a_new_user() {
+    public void createANewUser() {
 
-        String name = "Juan Pepito", address = "Cra 34 #10-25", email = "loco10@yopmail.com",
-                password = "loco10", message = "User Juan Pepito created succesfully";
+        String name = "Juan Pepito";
+        String address = "Cra 34 #10-25";
+        String email = "loco10@yopmail.com";
+        String password = "loco10";
+        String message = "User Juan Pepito created succesfully";
         long phoneNumber = 8607302;
 
         UserService userService = new UserService(userDomainRepository);
@@ -42,7 +47,7 @@ public class UserServiceShould {
     }
 
     @Test
-    public void find_a_user_by_its_id() throws NotFoundException {
+    public void findAnUserByItsId() throws NotFoundException {
 
         int usId = 1;
 
@@ -55,7 +60,7 @@ public class UserServiceShould {
     }
 
     @Test
-    public void find_a_user_by_its_email() throws SecurityException{
+    public void findAnUserByItsEmail() throws SecurityException {
 
         String email = "jblackheart@yopmail.com";
 

@@ -1,7 +1,6 @@
 package com.experimentality.Store.domain.repository;
 
 import com.experimentality.Store.persistence.entity.PurchaseEntity;
-
 import java.util.List;
 import java.util.Optional;
 

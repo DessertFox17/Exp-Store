@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class DynamicFilterDto {
+    private int prId;
     private String name;
     private double price;
     private double discountPrice;
