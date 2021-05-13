@@ -20,7 +20,7 @@ public class NewProductsDto {
     @DecimalMin(value = "0.1")
     @NotNull
     private double price;
-    @Min(value = 1)
+    @Min(value = 0)
     @NotNull
     private int discountPrct;
     @NotNull

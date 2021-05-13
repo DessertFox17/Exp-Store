@@ -18,7 +18,7 @@ import java.util.Map;
 public class UserService {
 
     @Autowired
-    private UserDomainRepository userDomainRepository;
+    private final UserDomainRepository userDomainRepository;
 
 
     public Map<String, Object> newUser(UserDto userPayload) {

@@ -63,11 +63,11 @@ public class ProductServiceShould {
     public void get_products_by_name_ordered_by_search_counter_and_paged() {
 
         int limit = 1, offset = 0;
-        String name = "Pantalon";
+        String name = "Pantalon", request = "";
 
         ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
 
-        Map<String, Object> productList = productService.dynamicFilter(name, limit, offset);
+        Map<String, Object> productList = productService.dynamicFilter(name, limit, offset, request);
 
         List<DynamicFilterDto> products = (List<DynamicFilterDto>) productList.get("results");
         products.forEach(dynamicFilterDto -> {
@@ -76,6 +76,7 @@ public class ProductServiceShould {
             assertNotNull(dynamicFilterDto.getBackImage());
             assertNotNull(dynamicFilterDto.getSearchCounter());
             assertNotNull(dynamicFilterDto.getPrice());
+            assertNotNull(dynamicFilterDto.getDiscountPrct());
             assertNotNull(dynamicFilterDto.getDiscountPrice());
         });
 
@@ -104,5 +105,18 @@ public class ProductServiceShould {
         assertEquals(discountPrice,product.get("discountPrice"));
         assertEquals(discountPrct,product.get("discountPrct"));
         assertNotNull(product.get("images"));
+    }
+
+    @Test
+    public void get_a_list_of_names_of_the_dataBase(){
+
+        String name = "Pantalones";
+
+        ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
+
+        Map<String, Object> results = productService.smartFilter(name);
+        List<String> titles = (List<String>) results.get("results");
+
+        assertNotNull(titles);
     }
 }

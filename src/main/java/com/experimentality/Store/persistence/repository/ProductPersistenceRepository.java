@@ -19,8 +19,26 @@ public class ProductPersistenceRepository implements ProductDomainRepository {
     private ProductCrudRepository productCrudRepository;
 
     @Override
-    public List<ProductEntity> dynamicFilter(String name, int limit, int offset) {
-        return productCrudRepository.dynamicFilter(name.toLowerCase(Locale.ROOT),  PageRequest.of(offset,limit, Sort.by(Sort.Direction.DESC, "searchCounter")));
+    public List<ProductEntity> dynamicFilter(String name, int limit, int offset, String request) {
+
+        if(request == "counter"){
+            return productCrudRepository
+                    .dynamicFilter(name.toLowerCase(Locale.ROOT), PageRequest
+                            .of(offset,limit,Sort.by(Sort.Direction.ASC,"searchCounter")));
+        }
+        if(request == "min"){
+            return productCrudRepository
+                    .dynamicFilter(name.toLowerCase(Locale.ROOT), PageRequest
+                            .of(offset,limit,Sort.by(Sort.Direction.ASC, "discountPrice")));
+        }
+        if(request == "max"){
+            return productCrudRepository
+                    .dynamicFilter(name.toLowerCase(Locale.ROOT),  PageRequest
+                            .of(offset,limit,Sort.by(Sort.Direction.DESC, "discountPrice")));
+        }
+
+        return productCrudRepository.dynamicFilter(name.toLowerCase(Locale.ROOT),  PageRequest
+                .of(offset,limit, Sort.by(Sort.Direction.ASC, "name")));
     }
 
     @Override

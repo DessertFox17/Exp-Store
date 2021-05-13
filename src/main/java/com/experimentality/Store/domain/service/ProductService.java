@@ -8,28 +8,23 @@ import com.experimentality.Store.domain.repository.SubcategoryDomainRepository;
 import com.experimentality.Store.persistence.entity.ProductEntity;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Service
 public class ProductService {
 
     @Autowired
-    private ProductDomainRepository productDomainRepository;
+    private final ProductDomainRepository productDomainRepository;
 
     @Autowired
-    private SubcategoryDomainRepository subcategoryCrudRepository;
+    private final SubcategoryDomainRepository subcategoryCrudRepository;
 
 
     public Map<String, Object> newProducts(List<NewProductsDto> productsPayload) {
@@ -52,14 +47,14 @@ public class ProductService {
     }
 
 
-    public Map<String, Object> dynamicFilter(String result, int limit, int offset) {
+    public Map<String, Object> dynamicFilter(String result, int limit, int offset, String request) {
 
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> page = new HashMap<>();
         ModelMapper modelMapper = new ModelMapper();
         List<DynamicFilterDto> products = new ArrayList<>();
 
-        List<ProductEntity> pProducts = productDomainRepository.dynamicFilter(result,limit, offset);
+        List<ProductEntity> pProducts = productDomainRepository.dynamicFilter(result,limit, offset, request);
         Long counter = productDomainRepository.dynamicFilterCounter(result);
 
         pProducts.forEach(productEntity -> products.add(modelMapper.map(productEntity, DynamicFilterDto.class)));
@@ -78,11 +73,15 @@ public class ProductService {
 
         Map<String, Object> map = new HashMap<>();
         ModelMapper modelMapper = new ModelMapper();
+        List<String> images = new ArrayList<>();
 
         ProductEntity pProduct = productDomainRepository.getByName(name)
                 .orElseThrow(() -> new NotFoundException(String.format("The product with name: %s does not exist",name)));
 
         ShowProductDto product = modelMapper.map(pProduct, ShowProductDto.class);
+
+        product.getImages().forEach(imageDto -> images.add(imageDto.getUrl()));
+        //System.out.println(images);
 
         Integer counter = pProduct.getSearchCounter();
         counter += 1;
@@ -94,8 +93,21 @@ public class ProductService {
         map.put("price", product.getPrice());
         map.put("discountPrice", product.getDiscountPrice());
         map.put("discountPrct", product.getDiscountPrct());
-        map.put("images", product.getImages());
+        map.put("images", images);
 
         return map;
     }
+
+
+    public Map<String, Object> smartFilter(String name) {
+
+        Map<String, Object> map = new HashMap<>();
+
+        List<String> pProducts = subcategoryCrudRepository.smartFilter(name);
+        List<Object> results = new ArrayList<>(pProducts);
+        map.put("results", results);
+
+        return map;
+    }
+
 }
