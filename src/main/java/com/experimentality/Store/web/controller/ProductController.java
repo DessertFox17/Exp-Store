@@ -95,7 +95,7 @@ public class ProductController {
         return productService.smartFilter(name);
     }
 
-    @GetMapping("/specific/{id}")
+    @GetMapping("/{id}")
     @ApiOperation(value = "Find a specific product",
             notes = "This endpoint finds a product by its name and everytime that is required a specific product " +
                     " increases its search counter")
