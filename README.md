@@ -200,6 +200,13 @@ en heroku:
 
 ![Local](https://user-images.githubusercontent.com/80864158/118323515-5ce57d00-b4c6-11eb-9a36-e28429a568dd.jpg)
 
+La colección de Postman para los endpoint está en la siguinete ruta
+
+
+
+
+
+
 
 
 
