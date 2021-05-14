@@ -184,6 +184,22 @@ El acceso está definido de la siguiente manera:
 Estos accesos estarán delimitados por el role al que perteneza cada cuenta, al retornar el JWT
 para el acceso a la API.
 
+---
+
+## Pruebas con Postman
+
+A en el siguiente enlace se dejará la colección de Postman para sus pruebas con este software,
+es necesario crear dos ambientes ya sea que se requiera probar de manera local o la API desplegada
+en heroku:
+
+- Variable de ambiente en Postman para API en Heroku
+
+![heroku](https://user-images.githubusercontent.com/80864158/118323497-57883280-b4c6-11eb-8c45-6d01b66e5df9.jpg)
+
+- Variable de ambiente en Postman para API en Local
+
+![Local](https://user-images.githubusercontent.com/80864158/118323515-5ce57d00-b4c6-11eb-9a36-e28429a568dd.jpg)
+
 
 
 
