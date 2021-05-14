@@ -117,7 +117,7 @@ Las dependencias necesarias para el proyecto son:
 ## Funcionalidades
 
 
-### Products
+### Productos
 
 Contiene endpoints para:
 
@@ -127,7 +127,7 @@ Contiene endpoints para:
 - Filtro dinámico con opciones de búesqueda por precio ASC, DESC y por más buscados
 - Búesqueda de detalles específicos de un producto.
 
-### Purchases
+### Compras
 
 Contiene endpoints para: 
 
@@ -136,18 +136,46 @@ Contiene endpoints para:
 - Actualizar el estado de una compra
 - Realizar nuevas compras
 
-### Users
+### Usuarios
 
 Contiene endpoints para: 
 
 - Visualizar los datos de usuario
 - Registrar nuevos usuarios
 
-### Authorization
+### Autorización
 
 Contiene un endpoint de loggin que retorna el JWT de acceso.
 
+---
 
+## Acceso
+
+El acceso está definido de la siguiente manera:
+
+### Público
+
+- Registrar nuevos usuarios
+- Filtro inteligente para autocompletar búsquedas
+- Filtro dinámico con opciones de búesqueda por precio ASC, DESC y por más buscados
+- Búesqueda de detalles específicos de un producto.
+
+### Usuarios registrados
+
+- Visualizar los datos de usuario
+- Registrar nuevos usuarios
+- Buscar las compras de un usuario
+- Visualizar el carrito de un usuario
+- Actualizar el estado de una compra
+- Realizar nuevas compras
+
+### Administradores o usuarios root
+
+- Crear productos
+- Asignar imágenes a productos
+
+Estos accesos estarán delimitados por el role al que perteneza cada cuenta, al retornar el JWT
+para el acceso a la API.
 
 
 
