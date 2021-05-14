@@ -202,11 +202,45 @@ en heroku:
 
 La colección de Postman para los endpoint está en la siguinete ruta
 
+[Clothesstore LATAM.postman_collection.zip](https://github.com/DessertFox17/Exp-Store/files/6481002/Clothesstore.LATAM.postman_collection.zip)
 
+Cabe recordar que los enpoint tienen niveles de acceso según el rol del usuario, por ende para los endpoints 
+de tipo público no es necesario utilizar el token, para los demás se debe hacer de la siguiente manera:
 
+Se debe ir al endpoint de autenticación, ingresar el email y la contraseña para posteriormente recibir un token
 
+![peticion](https://user-images.githubusercontent.com/80864158/118324546-d03bbe80-b4c7-11eb-908b-a313ffa49817.jpg)
 
+Cabe recordar que algunos endpoint tienen nivel de acceso Admin o Root por ennde si se desean probar todos los endpoints 
+se puede generar un token tipo user o uno tipo Admin o Root
 
+- User
+
+```
+{
+    "username": "catias@yopmail.com",
+    "password": "holahola"
+}
+```
+
+- Admin
+
+```
+{
+    "username": "jblackheart@yopmail.com",
+    "password": "holahola"
+}
+```
+
+Posteriormente en la pestaña Authorization en Postman, se debe seleccionar el Type Bearer Token y en el campo
+designado se debe ingresar el token recibido anteriormente.
+
+![token](https://user-images.githubusercontent.com/80864158/118324907-4d673380-b4c8-11eb-8640-8e66dbf04ae4.jpg)
+
+Ahora estás listo para iniciar las pruebas.
+
+## Gracias
+## Saludos
 
 
 
