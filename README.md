@@ -16,11 +16,26 @@ Backend con conexión a base de datos para buscar, registrar, comprar productos.
 ## Diseño de base de datos
 
 Es una base de datos relaconas basada en PostgreSQL, diseñada con una metodología 
-de 9 pasos para analizar, modelar y construir una base de datos, en la ruta del 
-proyecto se puede encontrar la carpeta DatabaseDesing, en donde se encuentran los
-detalles de la creación de la base de datos.
+de 9 pasos para analizar, modelar y construir una base de datos, en el siguiente 
+enlace se encuentra la metodología de diseño descrita y posteriormente sus anexos.
 
-[Clothesstore LATAM Database Design.pdf](https://github.com/DessertFox17/Exp-Store/files/6480523/Clothesstore.LATAM.Database.Design.pdf)
+[Clothesstore LATAM Database Design.pdf](https://github.com/DessertFox17/Exp-Store/files/6480539/Clothesstore.LATAM.Database.Design.pdf)
+
+### Anexos
+
+
+- [E - R Diagram.pdf](https://github.com/DessertFox17/Exp-Store/files/6480542/E.-.R.Diagram.pdf)
+
+- [Conceptual Model.pdf](https://github.com/DessertFox17/Exp-Store/files/6480547/Conceptual.Model.pdf)
+
+- [Logic Model.pdf](https://github.com/DessertFox17/Exp-Store/files/6480552/Logic.Model.pdf)
+
+- [Physical Model.pdf](https://github.com/DessertFox17/Exp-Store/files/6480560/Physical.Model.pdf)
+
+- [Tables generation create.txt](https://github.com/DessertFox17/Exp-Store/files/6480561/Tables.generation.create.txt)
+
+- [Data charge.txt](https://github.com/DessertFox17/Exp-Store/files/6480570/Data.charge.txt)
+
 
 ---
 
