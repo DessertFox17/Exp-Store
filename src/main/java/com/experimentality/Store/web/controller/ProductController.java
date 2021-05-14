@@ -31,7 +31,7 @@ public class ProductController {
     @PostMapping("/image")
     @ApiOperation(value = "New image", notes = "This endpoint stores a a list of images for products")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 403, message = "Forbiden")
     })
@@ -46,9 +46,9 @@ public class ProductController {
 
     @PostMapping("/new")
     @Transactional
-    @ApiOperation(value = "Create new products", notes = "This endpoint creates a new products at the database")
+    @ApiOperation(value = "Register new products", notes = "This endpoint creates a new products at the database")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Bad Request")
     })
     public Map<String, Object> newProducts(@Valid @RequestBody List<NewProductsDto> productsPayload, BindingResult bindingResult) {
@@ -65,7 +65,7 @@ public class ProductController {
             notes = "This endpoint returns a list of products related with the param," +
                     " there are some optional values min = true (orders the  products by price ASC)" +
                     " max = true (orders the products by price DESC), counter = true (orders the products" +
-                    " by search counter DESC) also with pagination through limit and offser, default values" +
+                    " by search counter DESC) also with pagination throught limit and offset, default values" +
                     " name = '', limit = 5, offset = 0, min-max-counter = false")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Ok"),
@@ -81,7 +81,6 @@ public class ProductController {
         if (min & !max & !counter) request = "min";
         if (max & !min & !counter) request = "max";
         if (counter & !min & !max) request = "counter";
-        System.out.println(request);
 
         return productService.dynamicFilter(name, limit, offset, request);
     }
