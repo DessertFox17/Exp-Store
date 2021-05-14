@@ -147,6 +147,13 @@ Contiene endpoints para:
 
 Contiene un endpoint de loggin que retorna el JWT de acceso.
 
+### Documentación en Swagger
+
+para mayor información sobre la API se puede seguir el siguiente link en donde se 
+muestra la documentación de la API con Swagger.
+
+http://expestore.herokuapp.com/store/swagger-ui.html
+
 ---
 
 ## Acceso
