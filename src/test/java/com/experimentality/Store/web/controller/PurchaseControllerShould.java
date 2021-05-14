@@ -87,7 +87,7 @@ public class PurchaseControllerShould {
 
         purchase.setStId(1);
         purchase.setUsId(1);
-        purchase.setPayMethod("test");
+        purchase.setPayMethod("Ok");
         purchase.setComment("test");
         purchase.setProducts(products);
 
