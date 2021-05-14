@@ -55,12 +55,12 @@ public class PurchaseController {
     @ApiOperation(value = "Update purchase status",
             notes = "This endpoint updates the status of a purchase")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 403, message = "Forbiden")
     })
     public Map<String, Object> updatePurchase(@Valid @RequestBody UpdatePurchaseStatusDto purchasePayload, BindingResult bindingResult) throws NotFoundException {
-        if (bindingResult.hasErrors()) throw new IllegalArgumentException("all or some mandatory fields are incomplete");
+        if (bindingResult.hasErrors()) throw new IllegalArgumentException("All or some mandatory fields are incomplete");
 
         return purchaseService.updatePurchase(purchasePayload);
     }
@@ -69,7 +69,7 @@ public class PurchaseController {
     @Transactional
     @ApiOperation(value = "New Purchase", notes = "This endpoint creates a new purchase")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Bad Request"),
             @ApiResponse(code = 403, message = "Forbiden")
     })

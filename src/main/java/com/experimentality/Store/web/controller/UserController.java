@@ -30,7 +30,7 @@ public class UserController {
     @Transactional
     @ApiOperation(value = "Creation of a new user", notes = "This endpoint creates a new user")
     @ApiResponses({
-            @ApiResponse(code = 201, message = "Created"),
+            @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 400, message = "Bad Request")
     })
     public Map<String, Object> newUser(@Valid @RequestBody UserDto userPayload, BindingResult bindingResult){

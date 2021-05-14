@@ -40,7 +40,7 @@ public class AuthControllerShould {
 
         AuthenticationRequest request = new AuthenticationRequest();
         request.setUsername("jblackheart@yopmail.com");
-        request.setPassword("test");
+        request.setPassword("testing");
 
         mockMvc.perform(post("/auth").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request))).andExpect(status().isUnauthorized());
