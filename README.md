@@ -11,6 +11,21 @@
 
 Backend con conexión a base de datos para buscar, registrar, comprar productos.
 
+Se puede correr de manera local con el comando 
+
+
+```
+git clone https://github.com/DessertFox17/Exp-Store.git
+```
+
+Se puede correr remoto en Heroku y Postman
+
+http://expestore.herokuapp.com
+
+y los contectos de ruta de cada endpoint, por ejemplo:
+
+http://expestore.herokuapp.com/store/product/1
+
 ---
 
 ## Diseño de base de datos
