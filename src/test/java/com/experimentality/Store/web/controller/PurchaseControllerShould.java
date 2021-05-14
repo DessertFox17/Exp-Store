@@ -99,8 +99,6 @@ public class PurchaseControllerShould {
     @Transactional
     public void createAPurchaseException() throws Exception {
         NewPurchaseDto purchase = new NewPurchaseDto();
-        NewProductPurchaseDto productPurchase = new NewProductPurchaseDto();
-        List<NewProductPurchaseDto> products = new ArrayList<>();
 
         mockMvc.perform(post("/purchase/new").contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(purchase))).andExpect(status().isBadRequest());

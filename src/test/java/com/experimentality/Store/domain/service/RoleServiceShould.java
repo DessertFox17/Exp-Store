@@ -37,7 +37,6 @@ public class RoleServiceShould {
     @Test
     public void lauchAnNotFoundException() throws NotFoundException {
         int roId = 5;
-        String name = "Super";
 
         RoleService role = new RoleService(roleDomainRepository);
 

@@ -26,8 +26,6 @@ public class UserServiceShould {
     @Transactional
     public void createANewUser() {
 
-
-
         String name = "Juan Pepito";
         String address = "Cra 34 #10-25";
         String email = "loco10@yopmail.com";
