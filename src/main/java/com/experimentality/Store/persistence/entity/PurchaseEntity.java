@@ -3,6 +3,9 @@ package com.experimentality.Store.persistence.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -55,6 +58,7 @@ public class PurchaseEntity {
     @JoinColumn(name = "user_id",insertable = false, updatable = false)
     private UserEntity user;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "purchase", cascade = {CascadeType.ALL})
     private List<ProductPurchaseEntity> products;
 

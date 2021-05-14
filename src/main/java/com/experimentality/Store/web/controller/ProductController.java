@@ -102,7 +102,7 @@ public class ProductController {
             @ApiResponse(code = 200, message = "Ok"),
             @ApiResponse(code = 404, message = "Not Found")
     })
-    public Map<String, Object> getByName(@PathVariable("id") int id) throws NotFoundException {
+    public Map<String, Object> getById(@PathVariable("id") int id) throws NotFoundException {
         return productService.getById(id);
     }
 }

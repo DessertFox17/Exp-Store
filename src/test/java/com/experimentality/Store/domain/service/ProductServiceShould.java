@@ -1,7 +1,9 @@
 package com.experimentality.Store.domain.service;
 
 import com.experimentality.Store.domain.dto.DynamicFilterDto;
+import com.experimentality.Store.domain.dto.ImageDto;
 import com.experimentality.Store.domain.dto.NewProductsDto;
+import com.experimentality.Store.domain.repository.ImageDomainRepository;
 import com.experimentality.Store.domain.repository.ProductDomainRepository;
 import com.experimentality.Store.domain.repository.SubcategoryDomainRepository;
 import javassist.NotFoundException;
@@ -9,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.stereotype.Component;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
@@ -24,14 +27,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 public class ProductServiceShould {
 
     @Autowired
-    private ProductDomainRepository productDomainRepository;
+    private ProductDomainRepository product;
 
     @Autowired
-    private SubcategoryDomainRepository subcategoryDomainRepository;
+    private SubcategoryDomainRepository subcategory;
+
+    @Autowired
+    private ImageDomainRepository image;
 
     @Test
     @Transactional
-    public void createsNewProdtcs(){
+    public void createsNewProdtcs() {
 
         int scId = 1;
         int discountPrct = 10;
@@ -42,7 +48,7 @@ public class ProductServiceShould {
         String backImage = "imagen trasera url";
         String message = "Products saved succesfully";
 
-        ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
+        ProductService productService = new ProductService(product, subcategory, image);
 
         NewProductsDto product = new NewProductsDto();
         List<NewProductsDto> newProducts = new ArrayList<>();
@@ -70,7 +76,7 @@ public class ProductServiceShould {
         String name = "Pantalon";
         String request = "";
 
-        ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
+        ProductService productService = new ProductService(product, subcategory, image);
 
         Map<String, Object> productList = productService.dynamicFilter(name, limit, offset, request);
 
@@ -103,29 +109,51 @@ public class ProductServiceShould {
         int discountPrct = 25;
         int prId = 6;
 
-        ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
+        ProductService productService = new ProductService(product, subcategory, image);
 
         Map<String, Object> product = productService.getById(prId);
 
         assertEquals(prId, product.get("prId"));
-        assertEquals(name,product.get("name"));
-        assertEquals(description,product.get("description"));
-        assertEquals(price,product.get("price"));
-        assertEquals(discountPrice,product.get("discountPrice"));
-        assertEquals(discountPrct,product.get("discountPrct"));
+        assertEquals(name, product.get("name"));
+        assertEquals(description, product.get("description"));
+        assertEquals(price, product.get("price"));
+        assertEquals(discountPrice, product.get("discountPrice"));
+        assertEquals(discountPrct, product.get("discountPrct"));
         assertNotNull(product.get("images"));
     }
 
     @Test
-    public void getAListOfNamesFromTheDatabase(){
+    public void getAListOfNamesFromTheDatabase() {
 
         String name = "Pantalones";
 
-        ProductService productService = new ProductService(productDomainRepository, subcategoryDomainRepository);
+        ProductService productService = new ProductService(product, subcategory, image);
 
         Map<String, Object> results = productService.smartFilter(name);
         List<String> titles = (List<String>) results.get("results");
 
         assertNotNull(titles);
+    }
+
+    @Test
+    @Transactional
+    public void createsAListOfNewImages() {
+        int prId = 1;
+        String url = "test";
+        String message = "Images saved succesfully";
+
+        ProductService productService = new ProductService(product, subcategory, image);
+
+        ImageDto image = new ImageDto();
+        List<ImageDto> images = new ArrayList<>();
+
+        image.setPrId(prId);
+        image.setUrl(url);
+        images.add(image);
+
+        Map<String, Object> response = productService.newImages(images);
+
+        assertEquals(message, response.get("Message"));
+
     }
 }

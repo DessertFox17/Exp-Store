@@ -4,15 +4,17 @@ import com.experimentality.Store.domain.dto.RoleDto;
 import com.experimentality.Store.domain.repository.RoleDomainRepository;
 import com.experimentality.Store.persistence.entity.RoleEntity;
 import javassist.NotFoundException;
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
 @Service
 public class RoleService {
 
     @Autowired
-    private RoleDomainRepository roleDomainRepository;
+    private final RoleDomainRepository roleDomainRepository;
 
 
     public RoleDto getRoleById(int roId) throws NotFoundException {

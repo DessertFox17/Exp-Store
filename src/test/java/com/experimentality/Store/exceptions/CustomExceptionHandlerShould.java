@@ -3,12 +3,15 @@ package com.experimentality.Store.exceptions;
 import com.experimentality.Store.domain.dto.ExceptionResponse;
 import javassist.NotFoundException;
 import org.junit.jupiter.api.Test;
-
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDateTime;
 import java.time.chrono.Chronology;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class CustomExceptionHandlerShould {
 
     @Test
