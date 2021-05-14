@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 public class ShowProductinPurDto {
     private int prId;
     private String name;
-    private String description;
-    private double price;
     private double discountPrice;
-    private int discountPrct;
+    private String frontImage;
+    private String backImage;
 }
