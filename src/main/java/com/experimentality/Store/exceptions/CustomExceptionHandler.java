@@ -1,6 +1,5 @@
 package com.experimentality.Store.exceptions;
 import com.experimentality.Store.domain.dto.ExceptionResponse;
-import com.experimentality.Store.domain.dto.ImageDto;
 import javassist.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;

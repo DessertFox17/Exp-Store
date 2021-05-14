@@ -9,18 +9,15 @@ import com.experimentality.Store.domain.repository.ProductDomainRepository;
 import com.experimentality.Store.domain.repository.SubcategoryDomainRepository;
 import com.experimentality.Store.persistence.entity.ImageEntity;
 import com.experimentality.Store.persistence.entity.ProductEntity;
-import com.google.common.base.Throwables;
 import javassist.NotFoundException;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @AllArgsConstructor
 @Service
