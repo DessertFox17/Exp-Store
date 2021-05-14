@@ -1,5 +1,6 @@
 package com.experimentality.Store.domain.service;
 
+import com.experimentality.Store.domain.dto.SecurityUserDto;
 import com.experimentality.Store.domain.dto.UserDto;
 import com.experimentality.Store.domain.repository.UserDomainRepository;
 import com.experimentality.Store.persistence.entity.UserEntity;
@@ -23,12 +24,14 @@ public class UserService {
 
     public Map<String, Object> newUser(UserDto userPayload) {
 
+        int roId = 3;
+
         Map<String, Object> map = new HashMap<>();
         ModelMapper modelMapper = new ModelMapper();
 
         UserEntity userEntity = modelMapper.map(userPayload, UserEntity.class);
 
-        userEntity.setRoId(3);
+        userEntity.setRoId(roId);
         userEntity.setRegDate(LocalDateTime.now());
 
         userDomainRepository.newUser(userEntity);
@@ -56,13 +59,13 @@ public class UserService {
 
         return map;
     }
-    public UserDto getByEmail(String email) {
+    public SecurityUserDto getByEmail(String email) {
 
         ModelMapper modelMapper = new ModelMapper();
 
         UserEntity pUser = userDomainRepository.getByEmail(email)
                 .orElseThrow(() -> new SecurityException("Incorrect username or password"));
 
-        return modelMapper.map(pUser, UserDto.class);
+        return modelMapper.map(pUser, SecurityUserDto.class);
     }
 }

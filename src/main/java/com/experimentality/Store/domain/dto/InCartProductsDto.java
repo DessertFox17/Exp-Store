@@ -5,8 +5,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ShowProductPurchaseDto {
+public class InCartProductsDto {
     private int quantity;
-    private double purchaseCost;
     private ShowProductinPurDto product;
 }

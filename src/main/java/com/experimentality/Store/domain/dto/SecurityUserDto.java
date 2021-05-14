@@ -3,25 +3,14 @@ package com.experimentality.Store.domain.dto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotNull;
-
-@NoArgsConstructor
 @Data
-public class UserDto {
+@NoArgsConstructor
+public class SecurityUserDto {
     private int usId;
-    @NotNull
+    private int roId;
     private String name;
-    @NotNull
     private String address;
-    @Min(value = 1)
-    @NotNull
     private long phoneNumber;
-    @NotNull
-    @Email
     private String email;
-    @NotNull
     private String password;
-
 }

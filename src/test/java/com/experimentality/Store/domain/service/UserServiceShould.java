@@ -1,5 +1,6 @@
 package com.experimentality.Store.domain.service;
 
+import com.experimentality.Store.domain.dto.SecurityUserDto;
 import com.experimentality.Store.domain.dto.UserDto;
 import com.experimentality.Store.domain.repository.UserDomainRepository;
 import javassist.NotFoundException;
@@ -66,7 +67,7 @@ public class UserServiceShould {
 
         UserService userService = new UserService(userDomainRepository);
 
-        UserDto user = userService.getByEmail(email);
+        SecurityUserDto user = userService.getByEmail(email);
 
         assertEquals(email, user.getEmail());
 

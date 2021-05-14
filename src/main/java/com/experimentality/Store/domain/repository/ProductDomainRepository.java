@@ -10,4 +10,6 @@ public interface ProductDomainRepository {
     Optional<ProductEntity> getById(int id);
     ProductEntity updateProduct(ProductEntity productPayload);
     List<ProductEntity> newProducts(List<ProductEntity> productsPayload);
+    Double getDiscountPrice(int prId);
+    Integer getPcntDiscount(int prId);
 }

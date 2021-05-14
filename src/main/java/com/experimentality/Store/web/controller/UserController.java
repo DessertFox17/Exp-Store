@@ -43,7 +43,7 @@ public class UserController {
         return userService.newUser(userPayload);
     }
 
-    @GetMapping("/specific/{id}")
+    @GetMapping("/{id}")
     @ApiOperation(value = "Get a specific user", notes = "This endpoint gets a user by its id")
     @ApiResponses({
             @ApiResponse(code = 200, message = "Ok"),

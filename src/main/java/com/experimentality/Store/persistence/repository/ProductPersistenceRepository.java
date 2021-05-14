@@ -21,17 +21,17 @@ public class ProductPersistenceRepository implements ProductDomainRepository {
     @Override
     public List<ProductEntity> dynamicFilter(String name, int limit, int offset, String request) {
 
-        if(request == "counter"){
+        if(request.equals("counter")){
             return productCrudRepository
                     .dynamicFilter(name.toLowerCase(Locale.ROOT), PageRequest
-                            .of(offset,limit,Sort.by(Sort.Direction.ASC,"searchCounter")));
+                            .of(offset,limit,Sort.by(Sort.Direction.DESC,"searchCounter")));
         }
-        if(request == "min"){
+        if(request.equals("min")){
             return productCrudRepository
                     .dynamicFilter(name.toLowerCase(Locale.ROOT), PageRequest
                             .of(offset,limit,Sort.by(Sort.Direction.ASC, "discountPrice")));
         }
-        if(request == "max"){
+        if(request.equals("max")){
             return productCrudRepository
                     .dynamicFilter(name.toLowerCase(Locale.ROOT),  PageRequest
                             .of(offset,limit,Sort.by(Sort.Direction.DESC, "discountPrice")));
@@ -59,6 +59,16 @@ public class ProductPersistenceRepository implements ProductDomainRepository {
     @Override
     public List<ProductEntity> newProducts(List<ProductEntity> productsPayload) {
         return (List<ProductEntity>) productCrudRepository.saveAll(productsPayload);
+    }
+
+    @Override
+    public Double getDiscountPrice(int prId) {
+        return productCrudRepository.getDiscountPrice(prId);
+    }
+
+    @Override
+    public Integer getPcntDiscount(int prId) {
+        return productCrudRepository.getPcntDiscount(prId);
     }
 
 
