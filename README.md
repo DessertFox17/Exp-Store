@@ -140,7 +140,7 @@ Contiene endpoints para:
 - Asignar imágenes a productos
 - Filtro inteligente para autocompletar búsquedas
 - Filtro dinámico con opciones de búesqueda por precio ASC, DESC y por más buscados
-- Búesqueda de detalles específicos de un producto.
+- Búsqueda de detalles específicos de un producto.
 
 ### Compras
 
@@ -179,8 +179,8 @@ El acceso está definido de la siguiente manera:
 
 - Registrar nuevos usuarios
 - Filtro inteligente para autocompletar búsquedas
-- Filtro dinámico con opciones de búesqueda por precio ASC, DESC y por más buscados
-- Búesqueda de detalles específicos de un producto.
+- Filtro dinámico con opciones de búsqueda por precio ASC, DESC y por más buscados
+- Búsqueda de detalles específicos de un producto.
 
 ### Usuarios registrados
 
