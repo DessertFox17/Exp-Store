@@ -139,7 +139,7 @@ Contiene endpoints para:
 - Crear productos
 - Asignar imágenes a productos
 - Filtro inteligente para autocompletar búsquedas
-- Filtro dinámico con opciones de búesqueda por precio ASC, DESC y por más buscados
+- Filtro dinámico con opciones de búsqueda por precio ASC, DESC y por más buscados
 - Búsqueda de detalles específicos de un producto.
 
 ### Compras
